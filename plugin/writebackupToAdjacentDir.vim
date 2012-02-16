@@ -3,9 +3,9 @@
 "
 " DEPENDENCIES:
 "   - Requires Vim 7.0 or higher. 
-"   - writebackup plugin (vimscript #1828). 
+"   - writebackup plugin (vimscript #1828), version 1.30 or higher. 
 
-" Copyright: (C) 2010 by Ingo Karkat
+" Copyright: (C) 2010 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
