@@ -30,7 +30,7 @@ generally is a good idea - just not for these special directories.
 This plugin offers a solution by integrating into the |writebackup.vim| plugin
 so that it checks for a directory with a '.backup' extension (e.g.
 /etc/profile.d.backup/), and places the backups in there, in case it exists.
-In all other cases, the backup is made in the same directory, as before. 
+In all other cases, the backup is made in the default directory, as before. 
 
 ==============================================================================
 USAGE					      *writebackupToAdjacentDir-usage*
@@ -78,6 +78,14 @@ template via >
     let g:WriteBackupAdjacentDir_BackupDirTemplate = '%s.backup'
 This must contain the "%s" placeholder, which is replaced with the original
 file's directory, e.g. "backup of %s". 
+					  *g:WriteBackupAdjacentDir_BackupDir*
+This plugin injects itself into |writebackup.vim| via the
+|g:WriteBackup_BackupDir| configuration. Its previous value is saved in
+|g:WriteBackupAdjacentDir_BackupDir| and used as a fallback, when no adjacent
+directory exists. If you need to change the fallback after sourcing the
+plugins, use the latter variable. However, to override this for a particular
+buffer, you still have to use the |b:WriteBackup_BackupDir| variable, as this
+plugin does not provide yet another override. 
 
 ==============================================================================
 LIMITATIONS				*writebackupToAdjacentDir-limitations*
@@ -94,6 +102,11 @@ IDEAS					      *writebackupToAdjacentDir-ideas*
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
 
+1.10	17-Feb-2012
+ENH: Save configured g:WriteBackup_BackupDir and use that as a fallback
+instead of always defaulting to '.', thereby allowing absolute and dynamic
+backup directories as a fallback. Suggested by Geoffrey Nimal. 
+
 1.00	02-Jun-2010
 First published version. 
 
@@ -101,7 +114,7 @@ First published version.
 Started development. 
 
 ==============================================================================
-Copyright: (C) 2010 Ingo Karkat
+Copyright: (C) 2010-2012 Ingo Karkat
 The VIM LICENSE applies to this script; see|copyright|. 
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
