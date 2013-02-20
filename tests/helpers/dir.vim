@@ -7,5 +7,6 @@ function! MakeReadonly( filespec )
 	" writable, so we schedule an undo action when Vim is closed. 
 	execute 'autocmd VimLeavePre * call vimtest#System("chmod +w " . ' . string(escapings#shellescape(fnamemodify(a:filespec, ':p'))) . ', 1)'
     endif
+    call vimtest#ErrorAndQuitIf(filewritable(a:filespec) != 0, 'Failed to make directory readonly: ' . a:filespec)
 endfunction
 
