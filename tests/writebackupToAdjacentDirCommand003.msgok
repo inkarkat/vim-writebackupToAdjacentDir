@@ -1,0 +1,2 @@
+Test: Readonly parent of backup dir
++E739: Cannot create directory: .*[/\\]WriteBackupTest[/\\]first level[/\\]second level.backup+
