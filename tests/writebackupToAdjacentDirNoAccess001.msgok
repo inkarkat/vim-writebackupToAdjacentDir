@@ -1,0 +1,2 @@
++".*[/\\]WriteBackupTest[/\\]more.backup[/\\]someplace else.txt.20\d\{6}a" +
++E212: Can't open file for writing (.*[/\\]WriteBackupTest[/\\]more.backup[/\\]someplace else.txt.20\d\{6}a)+
