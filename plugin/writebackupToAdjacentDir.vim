@@ -1,26 +1,27 @@
 " writebackupToAdjacentDir.vim: writebackup plugin writes to an adjacent
-" directory if it exists. 
+" directory if it exists.
 "
 " DEPENDENCIES:
-"   - Requires Vim 7.0 or higher. 
-"   - writebackup plugin (vimscript #1828), version 1.30 or higher. 
+"   - Requires Vim 7.0 or higher.
+"   - ingo/err.vim autoload script
+"   - writebackup plugin (vimscript #1828), version 1.30 or higher
 
-" Copyright: (C) 2010-2012 Ingo Karkat
-"   The VIM LICENSE applies to this script; see ':help copyright'. 
+" Copyright: (C) 2010-2013 Ingo Karkat
+"   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
-" REVISION	DATE		REMARKS 
+" REVISION	DATE		REMARKS
 "   1.10.003	17-Feb-2012	ENH: Save configured g:WriteBackup_BackupDir and
 "				use that as a fallback instead of always
 "				defaulting to '.', thereby allowing absolute and
 "				dynamic backup directories as a fallback.
-"				Suggested by Geoffrey Nimal. 
+"				Suggested by Geoffrey Nimal.
 "   1.00.002	02-Jun-2010	Finished, polished and added
-"				:WriteBackupMakeAdjacentDir command. 
+"				:WriteBackupMakeAdjacentDir command.
 "	001	01-Jun-2010	file creation
 
-" Avoid installing twice or when in unsupported Vim version. 
+" Avoid installing twice or when in unsupported Vim version.
 if exists('g:loaded_writebackupToAdjacentDir') || (v:version < 700)
     finish
 endif
@@ -42,8 +43,8 @@ function! s:GetAdjacentBackupDir(originalFilespec)
     let l:originalParentDirspec = fnamemodify(a:originalFilespec, ':p:h:h')
 "****D echomsg '****' l:originalDirname l:originalParentDirspec
 
-    " Use path separator as exemplified by the resolved dirspec. 
-    let l:pathSeparator = (l:originalParentDirspec =~# '\' && l:originalParentDirspec !~# '/' ? '\' : '/') 
+    " Use path separator as exemplified by the resolved dirspec.
+    let l:pathSeparator = (l:originalParentDirspec =~# '\' && l:originalParentDirspec !~# '/' ? '\' : '/')
 
     let l:adjacentBackupDir =
     \	(l:originalParentDirspec ==# l:pathSeparator ? '' : l:originalParentDirspec) .
@@ -64,7 +65,7 @@ endfunction
 function! writebackupToAdjacentDir#AdjacentBackupDir( originalFilespec, isQueryOnly )
     let l:adjacentBackupDir = s:GetAdjacentBackupDir(a:originalFilespec)
 
-    " If there is an adjacent backup directory, use it. 
+    " If there is an adjacent backup directory, use it.
     return (isdirectory(l:adjacentBackupDir) ? l:adjacentBackupDir : s:GetFallbackBackupDir(a:originalFilespec, a:isQueryOnly))
 endfunction
 
@@ -87,13 +88,10 @@ function! s:WriteBackupMakeAdjacentDir( ... )
 
     try
 	call call('mkdir', [l:adjacentBackupDir, ''] + a:000)
+	return 1
     catch /^Vim\%((\a\+)\)\=:E739/	" E739: Cannot create directory
-	" v:exception contains what is normally in v:errmsg, but with extra
-	" exception source info prepended, which we cut away. 
-	let v:errmsg = substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
-	echohl ErrorMsg
-	echomsg v:errmsg
-	echohl None
+	call ingo#err#SetVimException()
+	return 0
     endtry
 endfunction
 
@@ -107,7 +105,7 @@ let g:WriteBackup_BackupDir = function('writebackupToAdjacentDir#AdjacentBackupD
 
 "- commands -------------------------------------------------------------------
 
-command! -bar -nargs=? WriteBackupMakeAdjacentDir call <SID>WriteBackupMakeAdjacentDir(<f-args>)
+command! -bar -nargs=? WriteBackupMakeAdjacentDir if ! <SID>WriteBackupMakeAdjacentDir(<f-args>) | echoerr ingo#err#Get() | endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
