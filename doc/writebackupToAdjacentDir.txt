@@ -51,16 +51,18 @@ as before.
 INSTALLATION			       *writebackupToAdjacentDir-installation*
 
 This script is packaged as a |vimball|. If you have the "gunzip" decompressor
-in your PATH, simply edit the *.vba.gz package in Vim; otherwise, decompress
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
 the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
 vimball or via the |:UseVimball| command. >
-    vim writebackupToAdjacentDir.vba.gz
+    vim writebackupToAdjacentDir*.vmb.gz
     :so %
 To uninstall, use the |:RmVimball| command.
 
 DEPENDENCIES			       *writebackupToAdjacentDir-dependencies*
 
 - Requires Vim 7.0 or higher.
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.008 or
+  higher.
 - Requires the |writebackup.vim| plugin (vimscript #1828), version 1.30 or
   higher.
 - The |writebackupVersionControl.vim| plugin (vimscript #1829), which
@@ -102,6 +104,10 @@ IDEAS					      *writebackupToAdjacentDir-ideas*
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
 
+1.11	RELEASEME
+- Abort :WriteBackupMakeAdjacentDir on error.
+- Add dependency to ingo-library (vimscript #4433).
+
 1.10	17-Feb-2012
 ENH: Save configured g:WriteBackup_BackupDir and use that as a fallback
 instead of always defaulting to '.', thereby allowing absolute and dynamic
@@ -114,7 +120,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2010-2012 Ingo Karkat
+Copyright: (C) 2010-2013 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
