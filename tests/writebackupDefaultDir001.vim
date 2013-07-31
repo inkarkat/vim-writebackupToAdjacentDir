@@ -1,18 +1,16 @@
-" Test making a backup in an existing adjacent directory. 
+" Test making a backup in the default current directory. 
+
+runtime plugin/writebackup.vim
+runtime plugin/writebackupToAdjacentDir.vim
 
 cd $TEMP/WriteBackupTest
-edit first\ level/important.txt
-%s/current/fifth/
+edit first\ level/second\ level/someplace\ else.txt
 WriteBackup
-%s/fifth/CURRENT/
-write
-
-cd $TEMP/WriteBackupTest
-edit more/someplace\ else.txt
 %s/song/bird/
-WriteBackup
-%s/bird/fun/
 write
+
+edit first\ level/important.txt
+WriteBackup
 
 call ListFiles()
 call vimtest#Quit() 
