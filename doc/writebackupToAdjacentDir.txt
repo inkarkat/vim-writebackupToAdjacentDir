@@ -97,7 +97,8 @@ KNOWN PROBLEMS			     *writebackupToAdjacentDir-known-problems*
 TODO					       *writebackupToAdjacentDir-todo*
 
 - Support adjacent backup directories higher up in the directory hierarchy,
-  using finddir() to locate them.
+  and :WriteBackupMakeAdjacentDir [../..|/path/to/dir] to create them
+  higher-up.
 
 IDEAS					      *writebackupToAdjacentDir-ideas*
 
