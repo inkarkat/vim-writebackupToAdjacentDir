@@ -4,6 +4,7 @@
 " DEPENDENCIES:
 "   - Requires Vim 7.0 or higher.
 "   - ingo/err.vim autoload script
+"   - ingo/msg.vim autoload script
 "   - writebackup plugin (vimscript #1828), version 1.30 or higher
 
 " Copyright: (C) 2010-2013 Ingo Karkat
@@ -12,6 +13,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.11.004	27-Jun-2013	Implement abort on error for
+"				:WriteBackupMakeAdjacentDir.
 "   1.10.003	17-Feb-2012	ENH: Save configured g:WriteBackup_BackupDir and
 "				use that as a fallback instead of always
 "				defaulting to '.', thereby allowing absolute and
@@ -73,17 +76,11 @@ function! s:WriteBackupMakeAdjacentDir( ... )
     let l:adjacentBackupDir = s:GetAdjacentBackupDir(expand('%'))
 
     if isdirectory(l:adjacentBackupDir)
-	let v:warningmsg = 'Backup directory already exists: ' . fnamemodify(l:adjacentBackupDir, ':~:.')
-	echohl WarningMsg
-	echomsg v:warningmsg
-	echohl None
-	return
+	call ingo#msg#WarningMsg('Backup directory already exists: ' . fnamemodify(l:adjacentBackupDir, ':~:.'))
+	return 1
     elseif filereadable(l:adjacentBackupDir)
-	let v:errmsg = 'Cannot create backup directory; file exists: ' . fnamemodify(l:adjacentBackupDir, ':~:.')
-	echohl ErrorMsg
-	echomsg v:errmsg
-	echohl None
-	return
+	call ingo#err#Set('Cannot create backup directory; file exists: ' . fnamemodify(l:adjacentBackupDir, ':~:.'))
+	return 0
     endif
 
     try
