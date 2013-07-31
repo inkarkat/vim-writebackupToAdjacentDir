@@ -35,6 +35,9 @@ let g:loaded_writebackupToAdjacentDir = 1
 if ! exists('g:WriteBackupAdjacentDir_BackupDirTemplate')
     let g:WriteBackupAdjacentDir_BackupDirTemplate = '%s.backup'
 endif
+if ! exists('g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch')
+    let g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch = 1
+endif
 
 
 "- integration ----------------------------------------------------------------
