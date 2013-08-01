@@ -1,2 +1,3 @@
+autoload/writebackupToAdjacentDir.vim
 plugin/writebackupToAdjacentDir.vim
 doc/writebackupToAdjacentDir.txt
