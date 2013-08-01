@@ -39,10 +39,12 @@ Adjacent backup directories are never created by this plugin; you have to
 create such a directory yourself to indicate that backups should be placed in
 there.
 						 *:WriteBackupMakeAdjacentDir*
-:WriteBackupMakeAdjacentDir [{prot}]
+:WriteBackupMakeAdjacentDir [../..|/path/to/dir] [{prot}]
 		Create a backup directory adjacent to the current file's
-		directory. If {prot} is given it is used to set the protection
-		bits; default is 0755.
+		directory, or in a parent of that ("..", "../..", etc.), or of
+		any passed directory.
+		If {prot} is given it is used to set the protection bits;
+		default is 0755.
 
 After the adjacent backup directory has been created, just use |:WriteBackup|
 as before.
@@ -61,7 +63,7 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES			       *writebackupToAdjacentDir-dependencies*
 
 - Requires Vim 7.0 or higher.
-- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.008 or
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.011 or
   higher.
 - Requires the |writebackup.vim| plugin (vimscript #1828), version 1.30 or
   higher.
@@ -89,6 +91,14 @@ plugins, use the latter variable. However, to override this for a particular
 buffer, you still have to use the |b:WriteBackup_BackupDir| variable, as this
 plugin does not provide yet another override.
 
+			*g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch*
+By default, the plugin also searches for backup directories in upper
+directories (until it reaches the file system root), and then re-creates the
+path to the current file inside that parallel backup directory hierarchy. If
+you want to revert to the version 1.x behavior of the plugin, turn this off
+via: >
+    let g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch = 0
+<
 ==============================================================================
 LIMITATIONS				*writebackupToAdjacentDir-limitations*
 
@@ -96,18 +106,20 @@ KNOWN PROBLEMS			     *writebackupToAdjacentDir-known-problems*
 
 TODO					       *writebackupToAdjacentDir-todo*
 
-- Support adjacent backup directories higher up in the directory hierarchy,
-  and :WriteBackupMakeAdjacentDir [../..|/path/to/dir] to create them
-  higher-up.
-
 IDEAS					      *writebackupToAdjacentDir-ideas*
 
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
 
-1.11	RELEASEME
+2.00	RELEASEME
+- ENH: Implement upwards directory hierarchy search for backup directories,
+  and then re-create the path to the current file inside that parallel backup
+  directory hierarchy.
+- ENH: :WriteBackupMakeAdjacentDir now optionally also takes a target
+  directory to better support the new upwards directory hierarchy search.
 - Abort :WriteBackupMakeAdjacentDir on error.
-- Add dependency to ingo-library (vimscript #4433).
+- Add dependency to ingo-library (vimscript #4433). *** You need to separately
+  install ingo-library (vimscript #4433) version 1.011 (or higher)! ***
 
 1.10	17-Feb-2012
 ENH: Save configured g:WriteBackup_BackupDir and use that as a fallback
