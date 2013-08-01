@@ -13,6 +13,12 @@
 "
 " REVISION	DATE		REMARKS
 "   2.00.005	01-Aug-2013	Split off autoload script.
+"				Add
+"				g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch
+"				configuration and enable the new upwards
+"				directory hierarchy search by default.
+"				ENH: :WriteBackupMakeAdjacentDir now optionally
+"				also takes a target directory.
 "   1.11.004	27-Jun-2013	Implement abort on error for
 "				:WriteBackupMakeAdjacentDir.
 "   1.10.003	17-Feb-2012	ENH: Save configured g:WriteBackup_BackupDir and
@@ -50,6 +56,6 @@ let g:WriteBackup_BackupDir = function('writebackupToAdjacentDir#AdjacentBackupD
 
 "- commands -------------------------------------------------------------------
 
-command! -bar -nargs=? WriteBackupMakeAdjacentDir if ! writebackupToAdjacentDir#MakeAdjacentDir(<f-args>) | echoerr ingo#err#Get() | endif
+command! -bar -nargs=* -complete=dir WriteBackupMakeAdjacentDir if ! writebackupToAdjacentDir#MakeDir(<q-args>) | echoerr ingo#err#Get() | endif
 
 " vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
