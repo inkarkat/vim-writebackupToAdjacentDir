@@ -1,6 +1,6 @@
 function! MakeReadonly( filespec )
     if has('win32') || has('win64')
-	call vimtest#System('icacls ' . escapings#shellescape(a:filespec) . ' /deny "%userdomain%\%username%:(WD,AD,DC)"' )
+	call vimtest#System('icacls ' . escapings#shellescape(a:filespec) . ' /deny ' . escapings#shellescape('%userdomain%\%username%:(WD,AD,DC)'))
     else
 	call vimtest#System('chmod -w ' . escapings#shellescape(a:filespec))
 	" Linux cannot remove a directory tree if one contained directory is not
