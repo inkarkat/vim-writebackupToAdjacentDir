@@ -1,5 +1,8 @@
-runtime plugin/writebackup.vim
-runtime plugin/writebackupToAdjacentDir.vim
+if g:runVimTest !~# 'writebackupDefault\w*\d\+'
+    " Do not yet source the plugins for the default tests. 
+    runtime plugin/writebackup.vim
+    runtime plugin/writebackupToAdjacentDir.vim
+endif
 
 set noruler " Otherwise, the captured output may be truncated; we have long filenames. 
 
