@@ -3,6 +3,7 @@
 " DEPENDENCIES:
 "   - Requires Vim 7.0 or higher.
 "   - writebackupToAdjacentDir.vim autoload script
+"   - writebackupToAdjacentDir/Command.vim autoload script
 "   - ingo/err.vim autoload script
 "   - writebackup plugin (vimscript #1828), version 1.30 or higher
 
@@ -12,6 +13,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   2.00.006	02-Aug-2013	Move :WriteBackupMakeAdjacentDir implementation
+"				into a different autoload script.
 "   2.00.005	01-Aug-2013	Split off autoload script.
 "				Add
 "				g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch
@@ -56,6 +59,6 @@ let g:WriteBackup_BackupDir = function('writebackupToAdjacentDir#AdjacentBackupD
 
 "- commands -------------------------------------------------------------------
 
-command! -bar -nargs=* -complete=dir WriteBackupMakeAdjacentDir if ! writebackupToAdjacentDir#MakeDir(<q-args>) | echoerr ingo#err#Get() | endif
+command! -bar -nargs=* -complete=dir WriteBackupMakeAdjacentDir if ! writebackupToAdjacentDir#Command#MakeDir(<q-args>) | echoerr ingo#err#Get() | endif
 
 " vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
