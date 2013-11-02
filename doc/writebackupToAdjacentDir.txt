@@ -111,7 +111,7 @@ IDEAS					      *writebackupToAdjacentDir-ideas*
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
 
-2.00	RELEASEME
+2.00	02-Aug-2013
 - ENH: Implement upwards directory hierarchy search for backup directories,
   and then re-create the path to the current file inside that parallel backup
   directory hierarchy.
