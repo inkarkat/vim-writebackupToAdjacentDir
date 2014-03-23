@@ -13,7 +13,7 @@ try
     WriteBackupMakeAdjacentDir
     call vimtap#Fail('expected error with readonly parent of backup dir')
 catch
-    call vimtap#err#ThrownLike('E739: Cannot create directory: .*[/\\]WriteBackupTest[/\\]first level[/\\]second level.backup', 'error shown')
+    call vimtap#err#ThrownLike('E739: Cannot create directory: .*[/\\]WriteBackupTest[/\\]first level[/\\]second level\.backup', 'error shown')
 endtry
 
 WriteBackup
