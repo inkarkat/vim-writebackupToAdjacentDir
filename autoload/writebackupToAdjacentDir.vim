@@ -1,11 +1,8 @@
 " writebackupToAdjacentDir.vim: writebackup plugin writes to an adjacent directory if it exists.
 "
 " DEPENDENCIES:
-"   - Requires Vim 7.0 or higher.
-"   - ingo/err.vim autoload script
 "   - ingo/fs/path.vim autoload script
 "   - ingo/fs/traversal.vim autoload script
-"   - ingo/msg.vim autoload script
 "   - writebackup plugin (vimscript #1828), version 1.30 or higher
 
 " Copyright: (C) 2010-2013 Ingo Karkat
@@ -14,6 +11,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   2.00.006	02-Aug-2013	Move :WriteBackupMakeAdjacentDir implementation
+"				into a different autoload script.
 "   2.00.005	01-Aug-2013	Split off autoload script.
 "				ENH: Implement upwards directory hierarchy
 "				search for backup directories, and then
@@ -38,17 +37,17 @@ set cpo&vim
 function! s:GetBackupDir( dirname )
     return printf(g:WriteBackupAdjacentDir_BackupDirTemplate, a:dirname)
 endfunction
-function! s:CombineToBackupDir( parentDirspec, dirname )
+function! writebackupToAdjacentDir#CombineToBackupDir( parentDirspec, dirname )
     return ingo#fs#path#Combine(
     \   a:parentDirspec,
     \	s:GetBackupDir(a:dirname)
     \)
 endfunction
-function! s:GetAdjacentBackupDir( originalFilespec )
+function! writebackupToAdjacentDir#GetAdjacentBackupDir( originalFilespec )
     let l:originalDirname = fnamemodify(a:originalFilespec, ':p:h:t')
     let l:originalParentDirspec = fnamemodify(a:originalFilespec, ':p:h:h')
 "****D echomsg '****' l:originalDirname l:originalParentDirspec
-    return s:CombineToBackupDir(l:originalParentDirspec, l:originalDirname)
+    return writebackupToAdjacentDir#CombineToBackupDir(l:originalParentDirspec, l:originalDirname)
 endfunction
 
 function! writebackupToAdjacentDir#HasBackupDir( dirspec )
@@ -108,7 +107,7 @@ function! s:GetFallbackBackupDir( originalFilespec, isQueryOnly )
 endfunction
 function! writebackupToAdjacentDir#AdjacentBackupDir( originalFilespec, isQueryOnly )
     " If there is an adjacent backup directory, use it.
-    let l:adjacentBackupDir = s:GetAdjacentBackupDir(a:originalFilespec)
+    let l:adjacentBackupDir = writebackupToAdjacentDir#GetAdjacentBackupDir(a:originalFilespec)
     if isdirectory(l:adjacentBackupDir)
 	return l:adjacentBackupDir
     endif
@@ -130,58 +129,6 @@ function! writebackupToAdjacentDir#AdjacentBackupDir( originalFilespec, isQueryO
     endif
 
     return s:GetFallbackBackupDir(a:originalFilespec, a:isQueryOnly)
-endfunction
-
-function! writebackupToAdjacentDir#MakeDir( arguments )
-    if a:arguments =~# '^\d\{1,4}$'
-	let [l:dirArgument, l:prot] = ['', a:arguments]
-    else
-	let [l:dirArgument, l:prot] = matchlist(a:arguments, '^\(.\{-}\)\%(\s\+\(\d\{1,4}\)\)\?$')[1:2]
-    endif
-    if empty(l:dirArgument)
-	let l:backupDir = s:GetAdjacentBackupDir(expand('%'))
-    else
-	" Environment variables are not automatically expanded, and the
-	" whitespace escaping also is still there.
-	let l:dir = expand(l:dirArgument)
-
-	if l:dir =~# '^\.'
-	    " Determine the backup target directory relative to the current
-	    " buffer's dirspec.
-	    " Note: On Linux, fnamemodify(..., ':p') only simplifies a ".." at
-	    " the end when it ends with a path separator: "../", so make sure it
-	    " does.
-	    let l:targetDir = fnamemodify(
-	    \   ingo#fs#path#Combine(expand('%:p:h'),
-	    \       ingo#fs#path#Combine(l:dir, '')
-	    \   ),
-	    \   ':p'
-	    \)
-	else
-	    " An absolute target has been passed; just canonicalize it.
-	    let l:targetDir = fnamemodify(l:dir, ':p')
-	endif
-	let l:targetDirname = fnamemodify(l:targetDir, ':h:t')
-	let l:targetParentDirspec = fnamemodify(l:targetDir, ':h:h')
-	let l:backupDir = s:CombineToBackupDir(l:targetParentDirspec, l:targetDirname)
-"****D echomsg '****' l:targetDir l:backupDir
-    endif
-
-    if isdirectory(l:backupDir)
-	call ingo#msg#WarningMsg('Backup directory already exists: ' . fnamemodify(l:backupDir, ':~:.'))
-	return 1
-    elseif filereadable(l:backupDir)
-	call ingo#err#Set('Cannot create backup directory; file exists: ' . fnamemodify(l:backupDir, ':~:.'))
-	return 0
-    endif
-
-    try
-	call call('mkdir', [l:backupDir, 'p'] + (empty(l:prot) ? [] : [l:prot]))
-	return 1
-    catch /^Vim\%((\a\+)\)\=:E739/	" E739: Cannot create directory
-	call ingo#err#SetVimException()
-	return 0
-    endtry
 endfunction
 
 let &cpo = s:save_cpo
