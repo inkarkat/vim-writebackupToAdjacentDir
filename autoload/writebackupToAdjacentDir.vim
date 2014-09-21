@@ -5,7 +5,7 @@
 "   - ingo/fs/traversal.vim autoload script
 "   - writebackup plugin (vimscript #1828), version 1.30 or higher
 
-" Copyright: (C) 2010-2013 Ingo Karkat
+" Copyright: (C) 2010-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -120,7 +120,7 @@ function! writebackupToAdjacentDir#AdjacentBackupDir( originalFilespec, isQueryO
 		try
 		    call mkdir(l:upwardsBackupDir, 'p')
 		    return l:upwardsBackupDir
-		catch /^Vim\%((\a\+)\)\=:E739/	" E739: Cannot create directory
+		catch /^Vim\%((\a\+)\)\=:E739:/	" E739: Cannot create directory
 		    throw 'WriteBackup: Cannot create subdirectory inside backup directory: ' . l:upwardsBackupDir
 		endtry
 	    endif
