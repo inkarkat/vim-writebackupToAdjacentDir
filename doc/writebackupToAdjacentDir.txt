@@ -111,7 +111,7 @@ IDEAS					      *writebackupToAdjacentDir-ideas*
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
 
-2.01	RELEASEME
+2.01	29-Jan-2014
 - Compatibility: Fix Funcref errors for Vim 7.0/1.
 
 2.00	02-Aug-2013
@@ -136,7 +136,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2010-2013 Ingo Karkat
+Copyright: (C) 2010-2014 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
