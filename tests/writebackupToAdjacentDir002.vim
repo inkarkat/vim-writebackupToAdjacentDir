@@ -1,5 +1,6 @@
-" Test making a backup in a subdirectory of an existing adjacent directory. 
+" Test making a backup in a subdirectory of an existing adjacent directory.
 
+let g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch = 0
 cd $TEMP/WriteBackupTest
 
 edit first\ level/second\ level/someplace\ else.txt
@@ -9,5 +10,4 @@ WriteBackup
 write
 
 call ListFiles()
-call vimtest#Quit() 
-
+call vimtest#Quit()
