@@ -63,7 +63,7 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES			       *writebackupToAdjacentDir-dependencies*
 
 - Requires Vim 7.0 or higher.
-- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.011 or
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.022 or
   higher.
 - Requires the |writebackup.vim| plugin (vimscript #1828), version 1.30 or
   higher.
@@ -110,6 +110,10 @@ IDEAS					      *writebackupToAdjacentDir-ideas*
 
 ==============================================================================
 HISTORY					    *writebackupToAdjacentDir-history*
+
+2.02	RELEASEME
+- Use ingo#compat#glob().
+  *** You need to update to ingo-library (vimscript #4433) version 1.022! ***
 
 2.01	29-Jan-2014
 - Compatibility: Fix Funcref errors for Vim 7.0/1.
