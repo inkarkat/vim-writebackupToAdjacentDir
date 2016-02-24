@@ -2,9 +2,10 @@
 setlocal enableextensions
 
 call unix /quiet
+set LC_ALL=C
 set testdir=%TEMP%\WriteBackupTest
 pushd "%testdir%"
-for /F "delims=" %%f in ('find .^|sed "s/%%/^%%%%/g"') do call :listfile "%%f"
+for /F "delims=" %%f in ('find .^|sed "s/%%/^%%%%/g"^|sort') do call :listfile "%%f"
 popd
 (goto:EOF)
 
