@@ -7,10 +7,10 @@ edit first\ level/second\ level/third\ level/not\ important.txt
 %s/junk/funk/
 WriteBackupMakeAdjacentDir .. 0700
 call vimtest#StartTap()
-call vimtap#Plan(3 + (has('win32') || has('win64') ? 0 : 1))
+call vimtap#Plan(3 + (ingo#os#IsWinOrDos() ? 0 : 1))
 call vimtap#Ok(isdirectory('first level/second level.backup'), 'Backup directory created')
 call vimtap#Ok(! isdirectory('first level/second level.backup/third level'), 'Backup directory does not have subdir yet')
-if ! (has('win32') || has('win64'))
+if ! ingo#os#IsWinOrDos()
     call vimtap#Is(getfperm('first level/second level.backup'), 'rwx------', 'permissions resulting from 0700')
 endif
 
