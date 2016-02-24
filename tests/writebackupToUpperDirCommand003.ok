@@ -1,0 +1,43 @@
+.
+    [DIRECTORY]
+./first level
+    [DIRECTORY]
+./first level.backup
+    [DIRECTORY]
+./first level.backup/important.txt.19990815a
+    -> it all started here
+./first level.backup/important.txt.20061201a
+    -> first revision
+./first level.backup/important.txt.20061231a
+    -> second revision
+./first level.backup/important.txt.20080101a
+    -> third revision
+./first level.backup/important.txt.20080101b
+    -> fourth revision
+./first level.backup/second level
+    [DIRECTORY]
+./first level.backup/second level/third level
+    [DIRECTORY]
+./first level.backup/second level/third level/not important.txt.XXXXXXXXa
+    -> just funk
+./first level/backup
+    [DIRECTORY]
+./first level/backup/someplace else.txt.20080124a
+    -> here
+./first level/important.txt
+    -> current revision
+./first level/second level
+    [DIRECTORY]
+./first level/second level/someplace else.txt
+    -> it's a song
+./first level/second level/third level
+    [DIRECTORY]
+./first level/second level/third level/not important.txt
+    -> just zong
+./more
+    [DIRECTORY]
+./more.backup
+    [DIRECTORY]
+./more/someplace else.txt
+    -> it's a song
+
