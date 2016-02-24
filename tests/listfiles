@@ -6,7 +6,7 @@ scriptDir=$(dirname -- "$0")
 
 testdir=${TEMP:-/tmp}/WriteBackupTest
 pushd "$testdir" >/dev/null
-find . -print | sort | while read filespec
+find . -print | LANG=C sort | while read filespec
 do
     echo "$filespec" | sed -e '/\.1999[0-9][0-9][0-9][0-9]/n' -e '/\.200[6-8][0-9][0-9][0-9][0-9]/!s+\.[12][0-9][0-9][0-9][0-9][0-9][0-9][0-9]+.XXXXXXXX+g'
     if [ -d "$filespec" ]; then
