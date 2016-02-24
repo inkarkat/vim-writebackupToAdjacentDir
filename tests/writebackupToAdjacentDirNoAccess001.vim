@@ -9,7 +9,7 @@ edit more/someplace\ else.txt
 
 call vimtest#StartTap()
 call vimtap#Plan(1)
-call vimtap#err#ErrorsLike('E212: Can''t open file for writing (.*[/\\]WriteBackupTest[/\\]more.backup[/\\]someplace else.txt.20\d\{6}a)', 'WriteBackup', 'error shown')
+call vimtap#err#ErrorsLike('^E212: .* (.*[/\\]WriteBackupTest[/\\]more.backup[/\\]someplace else.txt.20\d\{6}a)', 'WriteBackup', 'Can''t open file for writing error shown')
 
 %s/bird/fun/
 write
