@@ -1,6 +1,7 @@
 " writebackupToAdjacentDir.vim: writebackup plugin writes to an adjacent directory if it exists.
 "
 " DEPENDENCIES:
+"   - ingo/compat.vim autoload script
 "   - ingo/fs/path.vim autoload script
 "   - ingo/fs/traversal.vim autoload script
 "   - writebackup plugin (vimscript #1828), version 1.30 or higher
@@ -11,6 +12,7 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   2.02.007	22-Sep-2014	Use ingo#compat#glob().
 "   2.00.006	02-Aug-2013	Move :WriteBackupMakeAdjacentDir implementation
 "				into a different autoload script.
 "   2.00.005	01-Aug-2013	Split off autoload script.
@@ -53,16 +55,10 @@ endfunction
 function! writebackupToAdjacentDir#HasBackupDir( dirspec )
     " Make sure that we're actually see the backup directories; the user may
     " have configured Vim to ignore them.
-    let l:save_wildignore = &wildignore
-    set wildignore=
-    try
-	let l:backupDirspecs = filter(
-	\   split(glob(ingo#fs#path#Combine(a:dirspec, s:GetBackupDir('*'))), '\n'),
-	\   'isdirectory(v:val)'
-	\)
-    finally
-	let &wildignore = l:save_wildignore
-    endtry
+    let l:backupDirspecs = filter(
+    \   ingo#compat#glob(ingo#fs#path#Combine(a:dirspec, s:GetBackupDir('*')), 1, 1),
+    \   'isdirectory(v:val)'
+    \)
     if empty(l:backupDirspecs)
 	return 0
     endif
