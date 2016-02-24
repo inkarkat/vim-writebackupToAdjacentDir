@@ -1,6 +1,6 @@
-" Test making a backup in the root directory. 
+" Test making a backup in the root directory.
 
-call vimtest#SkipAndQuitIf(! (has('win32') || has('win64')), "Don't want to clobber the single root of a Unix system with test files, probably won't have the permissions anyway. ") 
+call vimtest#SkipAndQuitIf(! ingo#os#IsWinOrDos(), "Don't want to clobber the single root of a Unix system with test files, probably won't have the permissions anyway. ")
 
 cd $TEMP/WriteBackupTest
 call vimtest#System('subst T: .')
@@ -26,5 +26,4 @@ try
 finally
     call vimtest#System('subst /d T:')
 endtry
-call vimtest#Quit() 
-
+call vimtest#Quit()
