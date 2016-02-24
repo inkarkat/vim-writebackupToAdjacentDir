@@ -1,5 +1,5 @@
 function! MakeReadonly( filespec )
-    if has('win32') || has('win64')
+    if ingo#os#IsWinOrDos()
 	call vimtest#System('icacls ' . ingo#compat#shellescape(a:filespec) . ' /deny ' . ingo#compat#shellescape('%userdomain%\%username%:(WD,AD,DC)'))
     else
 	call vimtest#System('chmod -w ' . ingo#compat#shellescape(a:filespec))
