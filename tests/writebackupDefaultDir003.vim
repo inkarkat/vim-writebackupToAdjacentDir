@@ -1,5 +1,6 @@
-" Test making a backup in a relative default directory. 
+" Test making a backup in a relative default directory.
 
+let g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch = 0
 let g:WriteBackup_BackupDir = '../backup'
 runtime plugin/writebackup.vim
 runtime plugin/writebackupToAdjacentDir.vim
@@ -14,5 +15,4 @@ edit first\ level/important.txt
 WriteBackup
 
 call ListFiles()
-call vimtest#Quit() 
-
+call vimtest#Quit()
