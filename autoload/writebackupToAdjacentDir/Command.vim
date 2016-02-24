@@ -6,7 +6,7 @@
 "   - ingo/fs/path.vim autoload script
 "   - ingo/msg.vim autoload script
 
-" Copyright: (C) 2010-2013 Ingo Karkat
+" Copyright: (C) 2010-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -81,7 +81,7 @@ function! writebackupToAdjacentDir#Command#MakeDir( arguments )
     try
 	call call('mkdir', [l:backupDir, 'p'] + (empty(l:prot) ? [] : [l:prot]))
 	return 1
-    catch /^Vim\%((\a\+)\)\=:E739/	" E739: Cannot create directory
+    catch /^Vim\%((\a\+)\)\=:E739:/	" E739: Cannot create directory
 	call ingo#err#SetVimException()
 	return 0
     endtry
