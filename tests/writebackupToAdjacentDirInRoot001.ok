@@ -6,6 +6,18 @@
     -> brand new
 ./first level
     [DIRECTORY]
+./first level.backup
+    [DIRECTORY]
+./first level.backup/important.txt.19990815a
+    -> it all started here
+./first level.backup/important.txt.20061201a
+    -> first revision
+./first level.backup/important.txt.20061231a
+    -> second revision
+./first level.backup/important.txt.20080101a
+    -> third revision
+./first level.backup/important.txt.20080101b
+    -> fourth revision
 ./first level/backup
     [DIRECTORY]
 ./first level/backup/someplace else.txt.20080124a
@@ -20,26 +32,14 @@
     [DIRECTORY]
 ./first level/second level/third level/not important.txt
     -> just junk
-./first level.backup
-    [DIRECTORY]
-./first level.backup/important.txt.19990815a
-    -> it all started here
-./first level.backup/important.txt.20061201a
-    -> first revision
-./first level.backup/important.txt.20061231a
-    -> second revision
-./first level.backup/important.txt.20080101a
-    -> third revision
-./first level.backup/important.txt.20080101b
-    -> fourth revision
 ./more
     [DIRECTORY]
-./more/someplace else.txt
-    -> it's a fun
 ./more.backup
     [DIRECTORY]
 ./more.backup/someplace else.txt.XXXXXXXXa
     -> it's a bird
+./more/someplace else.txt
+    -> it's a fun
 ./root.txt
     -> new stuff
 ./root.txt.XXXXXXXXa
