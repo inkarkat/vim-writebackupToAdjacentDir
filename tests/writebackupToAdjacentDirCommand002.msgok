@@ -1,5 +1,2 @@
 Test: Already existing backup dir
 +Backup directory already exists: \(.*[/\\]WriteBackupTest[/\\]\)\?first level.backup+
-
-Test: Already existing file
-+Cannot create backup directory; file exists: \(.*[/\\]WriteBackupTest[/\\]\)\?first level[/\\]second level.backup+
