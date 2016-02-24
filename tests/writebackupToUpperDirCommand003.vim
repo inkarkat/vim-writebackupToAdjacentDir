@@ -9,7 +9,7 @@ edit first\ level/second\ level/third\ level/not\ important.txt
 
 call vimtest#StartTap()
 call vimtap#Plan(1)
-call vimtap#err#ErrorsLike('E739: Cannot create directory: .*[/\\]WriteBackupTest[/\\]first level[/\\]second level\.backup', 'WriteBackupMakeAdjacentDir ..', 'error shown')
+call vimtap#err#ErrorsLike('^E739: .*: .*[/\\]WriteBackupTest[/\\]first level[/\\]second level\.backup', 'WriteBackupMakeAdjacentDir ..', 'Cannot create directory error shown')
 
 WriteBackup
 %s/funk/zong/
