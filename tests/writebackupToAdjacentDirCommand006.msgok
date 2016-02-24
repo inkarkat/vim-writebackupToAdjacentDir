@@ -1,0 +1,2 @@
+Test: Already existing backup dir
++Backup directory already exists: .*[/\\]WriteBackupTest[/\\]first level.backup+
