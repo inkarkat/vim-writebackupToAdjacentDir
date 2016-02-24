@@ -1,9 +1,10 @@
-" Test making a backup in a dynamic default directory. 
+" Test making a backup in a dynamic default directory.
 
 function! MyBackupDir(originalFilespec, isQueryOnly)
     return '../backup'
 endfunction
 
+let g:WriteBackupAdjacentDir_IsUpwardsBackupDirSearch = 0
 let g:WriteBackup_BackupDir = function('MyBackupDir')
 runtime plugin/writebackup.vim
 runtime plugin/writebackupToAdjacentDir.vim
@@ -18,5 +19,4 @@ edit first\ level/important.txt
 WriteBackup
 
 call ListFiles()
-call vimtest#Quit() 
-
+call vimtest#Quit()
