@@ -13,12 +13,7 @@ write
 
 call vimtest#StartTap()
 call vimtap#Plan(1)
-try
-    WriteBackup
-    call vimtap#Fail('expected error')
-catch
-    call vimtap#err#ThrownLike('Cannot create subdirectory inside backup directory: .*[/\\]WriteBackupTest[/\\]first level\.backup[/\\]second level[/\\]third level$', 'error shown')
-endtry
+call vimtap#err#ErrorsLike('Cannot create subdirectory inside backup directory: .*[/\\]WriteBackupTest[/\\]first level\.backup[/\\]second level[/\\]third level$', 'WriteBackup', 'error shown')
 
 %s/funk/zonk/
 write
