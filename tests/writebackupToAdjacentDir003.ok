@@ -2,6 +2,20 @@
     [DIRECTORY]
 ./first level
     [DIRECTORY]
+./first level.backup
+    [DIRECTORY]
+./first level.backup/important.txt.19990815a
+    -> it all started here
+./first level.backup/important.txt.20061201a
+    -> first revision
+./first level.backup/important.txt.20061231a
+    -> second revision
+./first level.backup/important.txt.20080101a
+    -> third revision
+./first level.backup/important.txt.20080101b
+    -> fourth revision
+./first level.backup/important.txt.XXXXXXXXa
+    -> sixth revision
 ./first level/backup
     [DIRECTORY]
 ./first level/backup/someplace else.txt.20080124a
@@ -18,24 +32,10 @@
     [DIRECTORY]
 ./first level/second level/third level/not important.txt
     -> just junk
-./first level.backup
-    [DIRECTORY]
-./first level.backup/important.txt.19990815a
-    -> it all started here
-./first level.backup/important.txt.20061201a
-    -> first revision
-./first level.backup/important.txt.20061231a
-    -> second revision
-./first level.backup/important.txt.20080101a
-    -> third revision
-./first level.backup/important.txt.20080101b
-    -> fourth revision
-./first level.backup/important.txt.XXXXXXXXa
-    -> sixth revision
 ./more
+    [DIRECTORY]
+./more.backup
     [DIRECTORY]
 ./more/someplace else.txt
     -> it's a song
-./more.backup
-    [DIRECTORY]
 
