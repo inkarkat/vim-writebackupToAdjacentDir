@@ -1,4 +1,5 @@
 call vimtest#AddDependency('vim-ingo-library')
+call vimtest#AddDependency('vim-writebackup')
 
 if g:runVimTest !~# 'writebackupDefault\w*\d\+'
     " Do not yet source the plugins for the default tests.
